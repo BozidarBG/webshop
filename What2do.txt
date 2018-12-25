@@ -1,8 +1,45 @@
 u settings keywords dodati
 Electro Store Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template, Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design
 
+sidebar low to high i high to low. kod andrea je
+<a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'low_high']) }}">Low to High</a> |
+<a href="{{ route('shop.index', ['category'=> request()->category, 'sort' => 'high_low']) }}">High to Low</a>
+ruter Route::get('/shop', 'ShopController@index')->name('shop.index');
+controler
+public function index()
+    {
+        $pagination = 9;
+        $categories = Frontcategory::all();
+
+        if (request()->category) {
+            $products = Product::with('frontcategories')->whereHas('frontcategories', function ($query) {
+                $query->where('slug', request()->category);
+            });
+
+            $categoryName = optional($categories->where('slug', request()->category)->first())->name;
+        } else {
+            $products = Product::where('featured', true);
+
+            $categoryName = 'Featured';
+        }
+
+        if (request()->sort == 'low_high') {
+            $products = $products->orderBy('price')->paginate($pagination);
+        } elseif (request()->sort == 'high_low') {
+            $products = $products->orderBy('price', 'desc')->paginate($pagination);
+        } else {
+            $products = $products->paginate($pagination);
+        }
 
 
 
+        //$products->paginate();
+        return view('shop')->with([
+            'products' => $products,
+            'categories' => $categories,
+            'categoryName' => $categoryName,
+        ]);
+    }
+****************************
 
 composer require cviebrock/eloquent-sluggable:^4.6

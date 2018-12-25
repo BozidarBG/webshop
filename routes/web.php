@@ -19,10 +19,27 @@ Route::get('/product/{slug}', 'FrontController@product')->name('product');
 
 Route::get('/brand/{slug}', 'FrontController@brand')->name('brand');
 
+Route::get('/about', 'FrontController@about')->name('about');
+
+Route::get('/contact', 'FrontController@contact')->name('contact');
+
+Route::post('/contact', 'FrontController@contactUs')->name('contactUs');
+
+Route::post('/sort-products-by-price-range', 'FrontController@sortBy')->name('sortBy');
+
+
 
 Auth::routes();
+Route::post('/login', [
+    'uses'=>'Auth\LoginController@authenticate',
+    'as'=>'login'
+]);
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::group(['middleware'=>'auth'], function(){
+    Route::get('/cart', 'CartController@index')->name('cart');
+});
+
+
 
 
 Route::group(['prefix' => 'admin'], function () {

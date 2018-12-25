@@ -9,31 +9,35 @@
         </div>
         <!-- price -->
         <div class="range border-bottom py-2">
-            <h3 class="agileits-sear-head mb-3">Price</h3>
-            <div class="w3l-range">
-                <ul>
-                    <li>
-                        <a href="#">Under 5.000</a>
-                    </li>
-                    <li>
-                        <a href="#">5.000 - 9.999</a>
-                    </li>
-                    <li class="my-1">
-                        <a href="#">$10.000 - 19.999</a>
-                    </li>
-                    <li>
-                        <a href="#">20.000 - 49.999</a>
-                    </li>
-                    <li class="mt-1">
-                        <a href="#">Over 50.000</a>
-                    </li>
-                </ul>
-            </div>
+            <h3 class="agileits-sear-head mb-3">Sort By Price</h3>
+            {{--<a href="{{route('low-to-high',['page_name'=>$title])}}">Low to high</a><br>--}}
+            {{--<a href="{{route('high-to-low',['page_name'=>$title])}}">High to low</a>--}}
+
+        </div>
+
+        <div class="range border-bottom py-2">
+            <h3 class="agileits-sear-head mb-3">Price range</h3>
+            <form id="price_range" method="post" action="{{route('sortBy')}}">
+                @csrf
+                <div class="form-group">
+                    <label for="price_from">From</label>
+                    <input type="number" id="price_from" name="from" class="form-control" placeholder="0">
+                </div>
+                <div class="form-group">
+                    <label for="price_to">To</label>
+                    <input type="number" id="price_to" name="to" class="form-control" placeholder="9999999">
+                </div>
+                <div class="form-group">
+                    <input type="hidden" id="page_name" name="page_name" value="{{$title}}">
+                    <button type="submit" id="price_search" class="btn btn-outline-primary">Search</button>
+                </div>
+            </form>
+
         </div>
         <!-- //price -->
         <!-- discounts -->
         <div class="left-side border-bottom py-2">
-            <h3 class="agileits-sear-head mb-3">Discount</h3>
+            <h3 class="agileits-sear-head mb-3">Sort By Discount</h3>
             <ul>
                 <li>
                     <input type="checkbox" class="checked">
@@ -156,40 +160,40 @@
         </div>
         <!-- //arrivals -->
         <!-- best seller -->
-        <div class="f-grid py-2">
-            <h3 class="agileits-sear-head mb-3">Best Seller</h3>
-            <div class="box-scroll">
-                <div class="scroll">
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-2 col-3 left-mar">
-                            <img src="images/k1.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-                            <a href="">Samsung Galaxy On7 Prime (Gold, 4GB RAM + 64GB Memory)</a>
-                            <a href="" class="price-mar mt-2">$12,990.00</a>
-                        </div>
-                    </div>
-                    <div class="row my-4">
-                        <div class="col-lg-3 col-sm-2 col-3 left-mar">
-                            <img src="images/k2.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-                            <a href="">Haier 195 L 4 Star Direct-Cool Single Door Refrigerator</a>
-                            <a href="" class="price-mar mt-2">$12,499.00</a>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-3 col-sm-2 col-3 left-mar">
-                            <img src="images/k3.jpg" alt="" class="img-fluid">
-                        </div>
-                        <div class="col-lg-9 col-sm-10 col-9 w3_mvd">
-                            <a href="">Ambrane 13000 mAh Power Bank (P-1310 Premium)</a>
-                            <a href="" class="price-mar mt-2">$1,199.00 </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{--<div class="f-grid py-2">--}}
+            {{--<h3 class="agileits-sear-head mb-3">Best Seller</h3>--}}
+            {{--<div class="box-scroll">--}}
+                {{--<div class="scroll">--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-lg-3 col-sm-2 col-3 left-mar">--}}
+                            {{--<img src="images/k1.jpg" alt="" class="img-fluid">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-lg-9 col-sm-10 col-9 w3_mvd">--}}
+                            {{--<a href="">Samsung Galaxy On7 Prime (Gold, 4GB RAM + 64GB Memory)</a>--}}
+                            {{--<a href="" class="price-mar mt-2">$12,990.00</a>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="row my-4">--}}
+                        {{--<div class="col-lg-3 col-sm-2 col-3 left-mar">--}}
+                            {{--<img src="images/k2.jpg" alt="" class="img-fluid">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-lg-9 col-sm-10 col-9 w3_mvd">--}}
+                            {{--<a href="">Haier 195 L 4 Star Direct-Cool Single Door Refrigerator</a>--}}
+                            {{--<a href="" class="price-mar mt-2">$12,499.00</a>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                    {{--<div class="row">--}}
+                        {{--<div class="col-lg-3 col-sm-2 col-3 left-mar">--}}
+                            {{--<img src="images/k3.jpg" alt="" class="img-fluid">--}}
+                        {{--</div>--}}
+                        {{--<div class="col-lg-9 col-sm-10 col-9 w3_mvd">--}}
+                            {{--<a href="">Ambrane 13000 mAh Power Bank (P-1310 Premium)</a>--}}
+                            {{--<a href="" class="price-mar mt-2">$1,199.00 </a>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+        {{--</div>--}}
         <!-- //best seller -->
     </div>
     <!-- //product right -->

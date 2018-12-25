@@ -47,4 +47,8 @@ class Product extends Model
     public function formatPrice(){
         return number_format($this->price, 2, ',', '.').' RSD';
     }
+
+    public function questions(){
+        return $this->hasMany(Question::class);
+    }
 }

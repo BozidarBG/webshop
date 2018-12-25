@@ -6,13 +6,16 @@ use Illuminate\Http\Request;
 use App\Category;
 use App\Product;
 use App\Brand;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
 {
     public function welcome(){
-        return view('welcome')
+        return view('products')
             ->with('title', 'Our products')
-            ->with('products', Product::where('quantity','>', 0)->inRandomOrder()->take(15)->get());
+            ->with('products', Product::inRandomOrder()->take(15)->paginate(15));
 
     }
 //show all products that belongs to the given category
@@ -24,9 +27,9 @@ class FrontController extends Controller
         }
         $products=Category::find($category->id)->products()->get();
         //dd($products);
-        return view('welcome')
+        return view('products')
             ->with('title', $category->name)
-            ->with('products', Category::find($category->id)->products()->where('quantity','>', 0)->paginate(15));
+            ->with('products', Category::find($category->id)->products()->paginate(15));
     }
 
     //show single product, by slug. if slug doesn't exist, return back without error msg
@@ -44,10 +47,106 @@ class FrontController extends Controller
         if(!isset($brand)){
             return redirect()->back();
         }
-        $products=Product::where('brand_id', $brand->id)->where('quantity','>', 0)->paginate(15);
+        $products=Product::where('brand_id', $brand->id)->paginate(15);
         //dd($products);
-        return view('welcome')
+        return view('products')
             ->with('title', $brand->name)
             ->with('products', $products);
     }
+
+    //shows about page
+    public function about(){
+        return view('about');
+    }
+
+    //shows contact page
+    public function contact(){
+        return view('contact');
+    }
+
+    //stores message sent via contact form
+    public function contactUs(Request $request){
+
+        $this->validate($request, [
+            'name'=>'required|max:200',
+            'email'=>'required|email',
+            'body'=>'required|string'
+        ]);
+
+        $contact=new \App\Contact();
+        $contact->name=$request->name;
+        $contact->email=$request->email;
+        $contact->body=$request->body;
+        if($contact->save()){
+            return response()->json('success');
+        }else{
+            return response()->json('error');
+        }
+
+    }
+
+    public function sortBy(Request $request){
+        \Log::info($request->all());
+        $this->validate($request, [
+
+            'page_name'=>'required|string'
+        ]);
+        if(!isset($request->from)){
+            $request->from=0;
+        }
+
+        if(!isset($request->to)){
+            $request->to=9999999;
+        }
+        \Log::info($request->from);
+       //dd($request->all());
+        //requrest->page_name Our products(svi), neki brand, neki category
+        $page=$request->page_name;
+
+
+        if($category=Category::where('name', $page)->first()){
+            //return all products from that category, with price range
+
+            $products=Category::find($category->id)->products()->whereBetween('price', [$request->from, $request->to])->paginate(15);
+            $title=$category->name;
+        }elseif($brand=Brand::where('name', $page)->first()){
+            //it is all product by brand, with price range
+            $products=Product::where('brand_id', $brand->id)->whereBetween('price', [$request->from, $request->to])->paginate(15);
+            $title=$brand->name;
+        }else{
+            //it is root page or user changed html
+            $products=$this->customPaginate(Product::whereBetween('price', [$request->from, $request->to])->get());
+            $title=$request->page_name;
+        }
+
+
+        return view('products')->with('title', $title)->with('products', $products);
+    }
+
+    private function customPaginate($productsCollection){
+
+        $page=LengthAwarePaginator::resolveCurrentPage();
+        $perPage=15;
+
+
+        //od kog elementa slajsujemo i koliko komada
+        //index počinje od nula... ako smo na prvoj stranici, page-1=0 * 0 =0 znači od 0 do 10-tog člana (bez rbr.10)
+        //ako smo na drugoj 2-1*10 = od 10-tog člana do dalje
+        $results=$productsCollection->slice(($page-1)*$perPage, $perPage)->values();
+
+        //rezultati, veličina kolekcije, koliko kom po stranici, trenutna stranica i opcije.
+        //path nam pomaže da nadjemo sledeću i prethodnu stranicu
+        $paginated = new LengthAwarePaginator($results, $productsCollection->count(), $perPage, $page,[
+            'path'=>LengthAwarePaginator::resolveCurrentPath()
+        ]);
+
+        //moramo da kažemo da uključi i ostale parametre da ne bi ignorisao per_page=X
+        //http://simpleapi.test/api/articles?per_page=3&page=2
+        //$paginated->appends(request()->all());
+
+
+        return $paginated;
+    }
+
+
 }

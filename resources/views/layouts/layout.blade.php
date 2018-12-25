@@ -16,7 +16,7 @@
         }
     </script>
     <!-- //Meta tag Keywords -->
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Custom-Files -->
     <link href="{{asset('css/bootstrap.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- Bootstrap css -->
@@ -29,6 +29,7 @@
     <!-- pop-up-box -->
     <link href="{{asset('css/menu.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- menu style -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" />
     <!-- //Custom-Files -->
     @yield('styles')
     <!-- web fonts -->
@@ -61,11 +62,11 @@
                     </li>
                     @guest
                     <li class="text-center border-right text-white">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white start-login-modal">
                             <i class="fas fa-sign-in-alt mr-2"></i> Log In </a>
                     </li>
                     <li class="text-center text-white">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white">
+                        <a href="#" data-toggle="modal" data-target="#exampleModal2" class="text-white start-register-modal">
                             <i class="fas fa-sign-out-alt mr-2"></i>Register </a>
                     </li>
                     @else
@@ -103,119 +104,13 @@
 <!-- //shop locator (popup) -->
 
 <!-- modals -->
-<!-- log in -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center">Log In</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{route('login')}}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label class="col-form-label">Email</label>
-                        <input type="text" class="form-control" placeholder=" " name="email" required="">
-                        @if ($errors->has('email'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Password</label>
-                        <input type="password" class="form-control" placeholder=" " name="password" required="">
-                        @if ($errors->has('password'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    <div class="right-w3l">
-                        <input type="submit" class="form-control" value="Log in">
-                    </div>
-                    <div class="sub-w3l">
-                        <div class="custom-control custom-checkbox mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
-                            <label class="custom-control-label" for="customControlAutosizing">Remember me?</label>
-                        </div>
-                    </div>
-                    <p class="text-center dont-do mt-3">Don't have an account?
-                        <a href="#" data-toggle="modal" data-target="#exampleModal2">
-                            Register Now</a>
-                    </p>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- register -->
-<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Register</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form action="{{route('register')}}" method="post">
-                    @csrf
-                    <div class="form-group">
-                        <label class="col-form-label">Your Name</label>
-                        <input type="text" class="form-control" placeholder=" " name="name" required="">
-                        @if ($errors->has('name'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('name') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Email</label>
-                        <input type="email" class="form-control" placeholder=" " name="email" required="">
-                        @if ($errors->has('email'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('email') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Password</label>
-                        <input type="password" class="form-control" placeholder=" " name="password" id="password1" required="">
-                        @if ($errors->has('password'))
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $errors->first('password') }}</strong>
-                            </span>
-                        @endif
-                    </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Confirm Password</label>
-                        <input type="password" class="form-control" placeholder=" " name="password_confirmation" id="password2" required="">
-                    </div>
-                    <div class="right-w3l">
-                        <input type="submit" class="form-control" value="Register">
-                    </div>
-                    <div class="sub-w3l">
-                        <div class="custom-control custom-checkbox mr-sm-2">
-                            <input type="checkbox" class="custom-control-input" id="customControlAutosizing2">
-                            <label class="custom-control-label" for="customControlAutosizing2">I Accept to the Terms & Conditions</label>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@include('includes.register-login1')
 <!-- //modal -->
 <!-- //top-header -->
 
 @include('includes.header')
 
-@include('includes.slider')
+{{--@include('includes.slider')--}}
 
 
 
@@ -226,10 +121,28 @@
 
 @include('includes.footer')
 <!-- //copyright -->
-
+@include('includes.cart-modal')
 <!-- js-files -->
 <!-- jquery -->
-<script src="{{asset('js/jquery-2.2.3.min.js')}}"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{{--<script src="{{asset('js/jquery-2.2.3.min.js')}}"></script>--}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+<script>
+    @if(Session::has('success'))
+    toastr.options.hideMethod = 'slideUp';
+    toastr.options.closeButton = true;
+    toastr.success("{{Session::get('success')}}");
+    @endif
+
+
+    @if(Session::has('error'))
+    toastr.options.hideMethod = 'slideUp';
+    toastr.options.closeButton = true;
+    toastr.error("{{Session::get('error')}}");
+    @endif
+</script>
 <!-- //jquery -->
 
 <!-- nav smooth scroll -->
@@ -294,24 +207,25 @@
 <!-- //cart-js -->
 
 <!-- password-script -->
-<script>
-    window.onload = function () {
-        document.getElementById("password1").onchange = validatePassword;
-        document.getElementById("password2").onchange = validatePassword;
-    }
+{{--<script>--}}
+    {{--window.onload = function () {--}}
+        {{--document.getElementById("password1").onchange = validatePassword;--}}
+        {{--document.getElementById("password2").onchange = validatePassword;--}}
+    {{--}--}}
 
-    function validatePassword() {
-        var pass2 = document.getElementById("password2").value;
-        var pass1 = document.getElementById("password1").value;
-        if (pass1 != pass2)
-            document.getElementById("password2").setCustomValidity("Passwords Don't Match");
-        else
-            document.getElementById("password2").setCustomValidity('');
-        //empty string means no validation error
-    }
-</script>
+    {{--function validatePassword() {--}}
+        {{--var pass2 = document.getElementById("password2").value;--}}
+        {{--var pass1 = document.getElementById("password1").value;--}}
+        {{--if (pass1 != pass2)--}}
+            {{--document.getElementById("password2").setCustomValidity("Passwords Don't Match");--}}
+        {{--else--}}
+            {{--document.getElementById("password2").setCustomValidity('');--}}
+        {{--//empty string means no validation error--}}
+    {{--}--}}
+{{--</script>--}}
 <!-- //password-script -->
-
+<!--   Custom login /register verification -->
+<script src="{{asset('js/register-login.js')}}"></script>
 <!-- scroll seller -->
 <script src="{{asset('js/scroll.js')}}"></script>
 <!-- //scroll seller -->
@@ -321,7 +235,7 @@
 <!-- //smoothscroll -->
 
 <!-- start-smooth-scrolling -->
-<script src="{{asset('js/move-top.js')}}"></script>
+{{--<script src="{{asset('js/move-top.js')}}"></script>--}}
 <script src="{{asset('js/easing.js')}}"></script>
 <script>
     jQuery(document).ready(function ($) {
@@ -347,18 +261,17 @@
          easingType: 'linear'
          };
          */
-        $().UItoTop({
-            easingType: 'easeOutQuart'
-        });
+//        $().UItoTop({
+//            easingType: 'easeOutQuart'
+//        });
 
     });
 </script>
 <!-- //smooth-scrolling-of-move-up -->
 
-<!-- for bootstrap working -->
-<script src="{{asset('js/bootstrap.js')}}"></script>
-<!-- //for bootstrap working -->
+
 <!-- //js-files -->
+<script src="{{asset('js/cart-modal.js')}}"></script>
 @yield('scripts')
 </body>
 

@@ -110,8 +110,9 @@
 
 <script src="{{asset('js/jquery.flexslider.js')}}"></script>
 <script>
-    // Can also be used with $(document).ready()
-    $(window).load(function () {
+    // Can also be used with
+    $(document).ready(function(){
+    //$(window).load(function () {
         $('.flexslider').flexslider({
             animation: "slide",
             controlNav: "thumbnails"

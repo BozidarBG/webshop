@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Auth;
 
 class LoginController extends Controller
 {
@@ -36,4 +38,19 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    //dodao ove func
+    public function authenticate(Request $request)
+    {
+        //\Log::info($request->all());
+        $credentials = $request->only('email', 'password');
+
+        if (Auth::attempt($credentials, $request->remember)) {
+            // Authentication passed...
+            return response()->json('success');
+        }else{
+            return response()->json('fail');
+        }
+    }
+
 }

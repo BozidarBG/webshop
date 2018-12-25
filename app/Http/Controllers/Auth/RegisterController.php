@@ -7,6 +7,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -68,5 +70,35 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    //dodao ovu
+    public function register(Request $request)
+    {
+        //\Log::info($request->all());
+        $result=Validator::make($request->all(), [
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:6|confirmed',
+        ]);
+
+
+        if(!$result->fails()){
+            event(new Registered($user = $this->create($request->all())));
+
+            if ($user) {
+                $this->guard()->login($user);
+                return $this->registered($request, $user)
+                    ?: response()->json('success');
+            } else {
+
+                return response()->json('fail');
+            }
+
+        }else{
+
+            return response()->json(['error', $result->errors()->all()]);
+        }
+
     }
 }

@@ -3188,3 +3188,68 @@ div#testimonials h4.m-title {
 .welcome_images{
     height:200px;
 }
+.table_header{
+    border:1px solid #ffffff;
+    color: #ffffff;
+    text-align: center;
+    font-size: 16px;
+}
+.table_header div{
+    border-left: 1px solid #ffffff;
+}
+
+.table_row{
+    /*border-top:1px solid black;*/
+    color: black;
+    text-align: center;
+    font-size: 15px;
+}
+
+.table_row div{
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+.table_row div:first-child{
+    margin-left: 2px;
+    margin-right: -2px;
+}
+
+.table_row div:last-child{
+    margin-right: 2px;
+    margin-left:-2px;
+    border-right: 1px solid black;
+}
+
+.quantity_selector{
+    border: none !important;
+    text-align: center;
+    vertical-align: middle !important;
+    display: inline-block;
+    padding: 10px;
+}
+.quantity_selector button, .quantity_selector span{
+    font-size: 1.1em;
+}
+.quantity_selector i:hover{
+    color:#005cbf;
+}
+.quantity_selector span{
+    margin-left: 8px;
+    margin-right: 8px;
+}
+.table_row div.without_discount, .table_row div.with_discount{
+    border-bottom: none;
+}
+
+.btn_stripped{
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+}
+.btn_stripped:hover{
+    color:#005cbf;
+}

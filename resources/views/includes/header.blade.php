@@ -24,15 +24,12 @@
                     <!-- //search -->
                     <!-- cart details -->
                     <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
-                        <div class="wthreecartaits wthreecartaits2 cart cart box_1">
-                            <form action="#" method="post" class="last">
-                                <input type="hidden" name="cmd" value="_cart">
-                                <input type="hidden" name="display" value="1">
-                                <button class="btn w3view-cart" type="submit" name="submit" value="">
-                                    <i class="fas fa-cart-arrow-down"></i>
-                                </button>
-                            </form>
-                        </div>
+                    @auth
+                        <a href="{{route('cart')}}"  class="btn btn-lg btn-dark" data-toggle="tooltip" data-placement="top" title="Go to your cart">
+                            <i class="fas fa-cart-arrow-down"></i>
+                        </a>
+                    @endauth
+
                     </div>
                     <!-- //cart details -->
                 </div>
@@ -96,14 +93,14 @@
                     </li>
 
                     <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link" href="about.html">About Us</a>
+                        <a class="nav-link" href="{{route('about')}}">About Us</a>
                     </li>
                     <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
                         <a class="nav-link" href="product.html">New Arrivals</a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="contact.html">Contact Us</a>
+                        <a class="nav-link" href="{{route('contact')}}">Contact Us</a>
                     </li>
                 </ul>
             </div>

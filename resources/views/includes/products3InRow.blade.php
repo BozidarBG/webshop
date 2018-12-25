@@ -3,6 +3,7 @@ $x=0;
 $y=0;
 $count=$products->count();
 @endphp
+@if($count != 0)
 @for($i=0; $i<ceil($count/3); $i++)
 {{--@dd($products)--}}
     <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
@@ -60,3 +61,12 @@ $count=$products->count();
         </div>
     </div>
 @endfor
+    @else
+    <div class="product-sec1 px-sm-4 px-3 py-sm-5  py-3 mb-4">
+        <div class="row">
+            <h3 class="text-danger">There are no products for your query</h3>
+        </div>
+    </div>
+@endif
+{{$products->links()}}
+<br>
