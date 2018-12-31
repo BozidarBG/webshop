@@ -6,7 +6,7 @@
             <div class="col-md-3 logo_agile">
                 <h1 class="text-center">
                     <a href="{{route('welcome')}}" class="font-weight-bold font-italic">
-                        <img src="{{asset('storage/'.setting('site.logo'))}}" alt=" " width="50" class="img-fluid">{{setting('site.title')}}
+                        {{setting('site.title')}}
                     </a>
                 </h1>
             </div>
@@ -24,12 +24,13 @@
                     <!-- //search -->
                     <!-- cart details -->
                     <div class="col-2 top_nav_right text-center mt-sm-0 mt-2">
+                    @if(Request::route()->getName() !="checkout")
                     @auth
-                        <a href="{{route('cart')}}"  class="btn btn-lg btn-dark" data-toggle="tooltip" data-placement="top" title="Go to your cart">
+                        <a href=""  class="btn btn-lg btn-dark show_cart_modal" data-toggle="tooltip" data-placement="top" title="Go to your cart">
                             <i class="fas fa-cart-arrow-down"></i>
                         </a>
                     @endauth
-
+                    @endif
                     </div>
                     <!-- //cart details -->
                 </div>
@@ -96,7 +97,7 @@
                         <a class="nav-link" href="{{route('about')}}">About Us</a>
                     </li>
                     <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
-                        <a class="nav-link" href="product.html">New Arrivals</a>
+                        <a class="nav-link" href="{{ route('checkout') }}">Checkout</a>
                     </li>
 
                     <li class="nav-item">

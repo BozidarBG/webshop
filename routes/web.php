@@ -36,7 +36,13 @@ Route::post('/login', [
 ]);
 
 Route::group(['middleware'=>'auth'], function(){
-    Route::get('/cart', 'CartController@index')->name('cart');
+    Route::get('/checkout', 'CartController@index')->name('checkout');
+    Route::get('/profile', 'ProfileController@show')->name('profile.show');
+    Route::get('/address', 'AddressController@create')->name('address.create');
+    Route::post('/address', 'AddressController@store')->name('address.store');
+    Route::get('/address/{address}/edit', 'AddressController@edit')->name('address.edit');
+    Route::post('/address-update/{address}', 'AddressController@update')->name('address.update');
+    Route::post('/address/{address}/delete', 'AddressController@destroy')->name('address.destroy');
 });
 
 

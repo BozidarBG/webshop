@@ -28,21 +28,16 @@ $count=$products->count();
                                 <span class="item_price">{{$products[$x]->formatPrice()}}</span>
                                 {{--<del>$280.00</del>--}}
                             </div>
-                            <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-                                <form action="#" method="post">
-                                    <fieldset>
-                                        <input type="hidden" name="cmd" value="_cart" />
-                                        <input type="hidden" name="add" value="1" />
-                                        <input type="hidden" name="business" value=" " />
-                                        <input type="hidden" name="item_name" value="{{$products[$x]->name}}" />
-                                        <input type="hidden" name="amount" value="{{$products[$x]->price}}" />
-                                        <input type="hidden" name="discount_amount" value="{{$products[$x]->discount}}" />
-                                        <input type="hidden" name="currency_code" value="USD" />
-                                        <input type="hidden" name="return" value=" " />
-                                        <input type="hidden" name="cancel_return" value=" " />
-                                        <input type="submit" name="submit" value="Add to cart" class="button btn" />
+                            <div>
+
+                                    <fieldset data-id="{{$products[$x]->id}}">
+                                        <input type="hidden" name="name" value="{{$products[$x]->name}}" />
+                                        <input type="hidden" name="price" value="{{$products[$x]->price}}" />
+                                        <input type="hidden" name="discount" value="{{$products[$x]->discount}}" />
+                                        <input type="hidden" name="quantity" value="{{$products[$x]->quantity}}" />
+                                        <input type="button" name="submit" value="Add to cart" class="btn btn-primary open_cart_modal" />
                                     </fieldset>
-                                </form>
+
                             </div>
                         </div>
                     </div>

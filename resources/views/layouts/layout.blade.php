@@ -29,14 +29,10 @@
     <!-- pop-up-box -->
     <link href="{{asset('css/menu.css')}}" rel="stylesheet" type="text/css" media="all" />
     <!-- menu style -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.css" />
+
     <!-- //Custom-Files -->
     @yield('styles')
-    <!-- web fonts -->
-    <!--<link href="//fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i&amp;subset=latin-ext" rel="stylesheet">-->
-    <!--<link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&amp;subset=cyrillic,cyrillic-ext,greek,greek-ext,latin-ext,vietnamese"-->
-    <!--rel="stylesheet">-->
-    <!-- //web fonts -->
+
 
 </head>
 
@@ -58,7 +54,7 @@
                             <i class="fas fa-truck mr-2"></i>Track Order</a>
                     </li>
                     <li class="text-center border-right text-white">
-                        <i class="fas fa-phone mr-2"></i> 001 234 5678
+                        <i class="fas fa-phone mr-2"></i> {{setting('site.phone1')}}
                     </li>
                     @guest
                     <li class="text-center border-right text-white">
@@ -70,28 +66,28 @@
                             <i class="fas fa-sign-out-alt mr-2"></i>Register </a>
                     </li>
                     @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="text-center text-white nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                    <li class="text-center text-white">{{Auth::user()->name}}</li>
+                    <li class="dropdown w-25">
+                        <a id="navbarDropdown" class="text-white nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                             <span class="caret"></span>
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                               onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
                             </a>
 
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="{{ route('logout') }}"
-                                   onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
 
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
+                            <a class="dropdown-item py-3" href="{{ route('profile.show') }}">Profile</a>
+                            <a class="dropdown-item py-3" href="{{ route('checkout') }}">Checkout</a>
+                        </div>
 
-                                <a class="dropdown-item" href="{{ route('logout') }}">Profile
-
-                                </a>
-                            </div>
-
-                        </li>
+                    </li>
                     @endauth
                 </ul>
                 <!-- //header lists -->
@@ -116,10 +112,10 @@
 
 @yield('content')
 
-@include('includes.special')
+{{--@include('includes.special')--}}
 
 
-@include('includes.footer')
+{{--@include('includes.footer')--}}
 <!-- //copyright -->
 @include('includes.cart-modal')
 <!-- js-files -->
@@ -128,21 +124,7 @@
 {{--<script src="{{asset('js/jquery-2.2.3.min.js')}}"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
-<script>
-    @if(Session::has('success'))
-    toastr.options.hideMethod = 'slideUp';
-    toastr.options.closeButton = true;
-    toastr.success("{{Session::get('success')}}");
-    @endif
 
-
-    @if(Session::has('error'))
-    toastr.options.hideMethod = 'slideUp';
-    toastr.options.closeButton = true;
-    toastr.error("{{Session::get('error')}}");
-    @endif
-</script>
 <!-- //jquery -->
 
 <!-- nav smooth scroll -->
@@ -183,26 +165,26 @@
 <!-- //popup modal (for location)-->
 
 <!-- cart-js -->
-<script src="{{asset('js/minicart.js')}}"></script>
+{{--<script src="{{asset('js/minicart.js')}}"></script>--}}
 <script>
-    paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
-
-    paypals.minicarts.cart.on('checkout', function (evt) {
-        var items = this.items(),
-                len = items.length,
-                total = 0,
-                i;
-
-        // Count the number of each item in the cart
-        for (i = 0; i < len; i++) {
-            total += items[i].get('quantity');
-        }
+//    paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
+//
+//    paypals.minicarts.cart.on('checkout', function (evt) {
+//        var items = this.items(),
+//                len = items.length,
+//                total = 0,
+//                i;
+//
+//        // Count the number of each item in the cart
+//        for (i = 0; i < len; i++) {
+//            total += items[i].get('quantity');
+//        }
 
 //        if (total < 3) {
 //            alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
 //            evt.preventDefault();
 //        }
-    });
+//    });
 </script>
 <!-- //cart-js -->
 

@@ -42,4 +42,5 @@ public function index()
     }
 ****************************
 
+
 composer require cviebrock/eloquent-sluggable:^4.6

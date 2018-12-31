@@ -23,7 +23,7 @@ class CreateAddressesTable extends Migration
             $table->string('phone1');
             $table->string('phone2')->nullable();
             $table->string('email');
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

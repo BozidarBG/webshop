@@ -1679,7 +1679,7 @@ td.invert-image a img {
 }
 
 .information-wrapper input,
-.information-wrapper select {
+.information-wrapper textarea {
     width: 100%;
     font-size: 15px;
     letter-spacing: 1px;
@@ -2236,7 +2236,7 @@ div#testimonials h4.m-title {
 
 @media(max-width: 1280px) {
     .logo_agile {
-        padding: 26px 0 21px 42px;
+        padding: 26px 0 21px 30px;
     }
     .logo_agile h1 a img {
         left: -34%;
@@ -2251,10 +2251,10 @@ div#testimonials h4.m-title {
         font-size: 14px;
     }
     .logo_agile {
-        padding: 24px 0 21px 35px;
+        padding: 24px 0 21px 25px;
     }
     .logo_agile h1 a {
-        font-size: 36px;
+        font-size: 30px;
     }
     .logo_agile h1 a img {
         left: -34%;
@@ -2361,7 +2361,7 @@ div#testimonials h4.m-title {
         top: -11px;
     }
     .logo_agile {
-        padding: 20px 0 21px 46px;
+        padding: 20px 0 21px 36px;
     }
     .logo_agile h1 a {
         font-size: 34px;
@@ -2506,7 +2506,7 @@ div#testimonials h4.m-title {
         font-size: 13px;
     }
     .logo_agile h1 a {
-        font-size: 28px;
+        font-size: 25px;
     }
     .logo_agile h1 a img {
         left: -29%;
@@ -3225,17 +3225,19 @@ div#testimonials h4.m-title {
     text-align: center;
     vertical-align: middle !important;
     display: inline-block;
-    padding: 10px;
+
 }
-.quantity_selector button, .quantity_selector span{
+.quantity_selector button{
     font-size: 1.1em;
+
+
 }
 .quantity_selector i:hover{
     color:#005cbf;
 }
-.quantity_selector span{
-    margin-left: 8px;
-    margin-right: 8px;
+.quantity_selector button{
+    margin-left: 2px;
+    margin-right: 2px;
 }
 .table_row div.without_discount, .table_row div.with_discount{
     border-bottom: none;
@@ -3252,4 +3254,8 @@ div#testimonials h4.m-title {
 }
 .btn_stripped:hover{
     color:#005cbf;
+}
+
+.btn_circle{
+    border-radius: 5%;
 }
