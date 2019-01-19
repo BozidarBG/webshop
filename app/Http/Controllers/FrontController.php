@@ -85,8 +85,8 @@ class FrontController extends Controller
 
     }
 
-    public function sortBy(Request $request){
-        \Log::info($request->all());
+    public function range(Request $request){
+       // \Log::info($request->all());
         $this->validate($request, [
 
             'page_name'=>'required|string'
@@ -98,25 +98,23 @@ class FrontController extends Controller
         if(!isset($request->to)){
             $request->to=9999999;
         }
-        \Log::info($request->from);
-       //dd($request->all());
-        //requrest->page_name Our products(svi), neki brand, neki category
+
         $page=$request->page_name;
 
 
         if($category=Category::where('name', $page)->first()){
             //return all products from that category, with price range
 
-            $products=Category::find($category->id)->products()->whereBetween('price', [$request->from, $request->to])->paginate(15);
-            $title=$category->name;
+            $products=Category::find($category->id)->products()->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->paginate(15);
+            $title=$category->name.' - price range from: '.number_format($request->from, 2, ',', '.').' to: '.number_format($request->to, 2, ',', '.');
         }elseif($brand=Brand::where('name', $page)->first()){
             //it is all product by brand, with price range
-            $products=Product::where('brand_id', $brand->id)->whereBetween('price', [$request->from, $request->to])->paginate(15);
-            $title=$brand->name;
+            $products=Product::where('brand_id', $brand->id)->whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->paginate(15);
+            $title=$brand->name.' - price range from: '.number_format($request->from, 2, ',', '.').' to: '.number_format($request->to, 2, ',', '.');
         }else{
             //it is root page or user changed html
-            $products=$this->customPaginate(Product::whereBetween('price', [$request->from, $request->to])->get());
-            $title=$request->page_name;
+            $products=$this->customPaginate(Product::whereBetween('price', [$request->from, $request->to])->orderBy('price', 'asc')->get());
+            $title=$request->page_name.' - price range from: '.number_format($request->from, 2, ',', '.').' to: '.number_format($request->to, 2, ',', '.');
         }
 
 
@@ -148,5 +146,20 @@ class FrontController extends Controller
         return $paginated;
     }
 
+    public function search(Request $request){
+        $this->validate($request, [
+            'item'=>'string|required'
+        ]);
+
+        $products=Product::where('name', 'like', '%'.$request->item.'%') ? Product::where('name', 'like', '%'.$request->item.'%')->paginate(15) : null;
+
+        return view('products')
+            ->with('title', 'Search')
+            ->with('products', $products);
+
+
+
+
+    }
 
 }

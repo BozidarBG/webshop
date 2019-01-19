@@ -46,26 +46,15 @@
                 <div class="col-lg-7 single-right-left simpleCart_shelfItem">
                     <h3 class="mb-3">{{$product->excerpt}}</h3>
                     <p class="mb-3">
+                        @if($product->discount)
                         <span class="item_price">{{$product->formatPrice()}}</span>
-                        <del class="mx-2 font-weight-light">$280.00</del>
+                        <del class="mx-2 font-weight-light">{{$product->formatPriceWithoutDiscount()}}</del>
+                        @else
+                        <span class="item_price">{{$product->formatPrice()}}</span>
+                        @endif
                         <label>Free delivery</label>
                     </p>
-                    <div class="single-infoagile">
-                        <ul>
-                            <li class="mb-3">
-                                Cash on Delivery Eligible.
-                            </li>
-                            <li class="mb-3">
-                                Shipping Speed to Delivery.
-                            </li>
-                            <li class="mb-3">
-                                EMIs from $655/month.
-                            </li>
-                            <li class="mb-3">
-                                Bank OfferExtra 5% off* with Axis Bank Buzz Credit CardT&C
-                            </li>
-                        </ul>
-                    </div>
+
                     <div class="product-single-w3l">
                         <p class="my-3">
                             <i class="far fa-hand-point-right mr-2"></i>

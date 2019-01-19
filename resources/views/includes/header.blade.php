@@ -16,8 +16,9 @@
                 <div class="row">
                     <!-- search -->
                     <div class="col-10 agileits_search">
-                        <form class="form-inline" action="#" method="post">
-                            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
+                        <form class="form-inline" action="{{route('search')}}" method="post">
+                            @csrf
+                            <input name="item" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" required>
                             <button class="btn my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </div>

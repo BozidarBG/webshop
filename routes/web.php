@@ -25,9 +25,11 @@ Route::get('/contact', 'FrontController@contact')->name('contact');
 
 Route::post('/contact', 'FrontController@contactUs')->name('contactUs');
 
-Route::post('/sort-products-by-price-range', 'FrontController@sortBy')->name('sortBy');
+Route::post('/price-range', 'FrontController@range')->name('range');
 
 
+
+Route::post('/search', 'FrontController@search')->name('search');
 
 Auth::routes();
 Route::post('/login', [
@@ -56,3 +58,5 @@ Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 
 });
+
+Route::get('/{}');

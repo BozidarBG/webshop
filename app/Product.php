@@ -45,7 +45,12 @@ class Product extends Model
 
 
     public function formatPrice(){
-        return number_format($this->price, 2, ',', '.').' RSD';
+        //return number_format($this->price, 2, ',', '.')
+        return number_format($this->price -($this->price*$this->discount/100), 2 ,',', '.').' RSD';
+    }
+
+    public function formatPriceWithoutDiscount(){
+        return number_format($this->price, 2 ,',', '.').' RSD';
     }
 
     public function questions(){
