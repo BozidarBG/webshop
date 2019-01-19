@@ -7,6 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Cart extends Model
 {
     //
+    public function order(){
+        return $this->belongsTo(Order::class);
+    }
+
+    public function product(){
+        return $this->belongsTo(Product::class);
+    }
+
+    public function formatPrice($price){
+        return number_format($price, 2, ',', '.');
+    }
 
     /*
                 $table->integer('order_id');

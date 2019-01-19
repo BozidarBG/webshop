@@ -44,3 +44,10 @@ public function index()
 
 
 composer require cviebrock/eloquent-sluggable:^4.6
+cartalyst/stripe-laravel
+
+https://www.youtube.com/watch?v=fgsI5jyPSAY
+19:09 sam stigao
+metoda store u cart controller prima request, po njemu treba da napravi porudžbinu
+i pošalje zahtev na stripe
+ako je sve ok, vraća se json da je ok, local storage se briše, i daje se potvrda da je plaćeno

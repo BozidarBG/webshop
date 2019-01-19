@@ -52,12 +52,12 @@
 
             <div class="collapse navbar-collapse " id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto text-center mr-xl-5 ">
-                    <li class="nav-item active mr-lg-2 mb-lg-0 mb-2">
+                    <li class="nav-item {{Request::is("/") ? 'active' : ''}} mr-lg-2 mb-lg-0 mb-2">
                         <a class="nav-link" href="{{route('welcome')}}">Home
                             <span class="sr-only">(current)</span>
                         </a>
                     </li>
-                    <li class="nav-item dropdown mr-lg-2 mb-lg-0 mb-2">
+                    <li class="nav-item dropdown {{Request::is("category*") ? 'active' : ''}} mr-lg-2 mb-lg-0 mb-2">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Categories
                             <?php $count=$categories->count();
@@ -93,14 +93,14 @@
                         </div>
                     </li>
 
-                    <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                    <li class="nav-item {{Request::is("about") ? 'active' : ''}} mr-lg-2 mb-lg-0 mb-2">
                         <a class="nav-link" href="{{route('about')}}">About Us</a>
                     </li>
-                    <li class="nav-item mr-lg-2 mb-lg-0 mb-2">
+                    <li class="nav-item {{Request::is("checkout") ? 'active' : ''}} mr-lg-2 mb-lg-0 mb-2">
                         <a class="nav-link" href="{{ route('checkout') }}">Checkout</a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item {{Request::is("contact") ? 'active' : ''}} mr-lg-2 mb-lg-0 mb-2">
                         <a class="nav-link" href="{{route('contact')}}">Contact Us</a>
                     </li>
                 </ul>

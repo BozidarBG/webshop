@@ -66,7 +66,7 @@
                             <i class="fas fa-sign-out-alt mr-2"></i>Register </a>
                     </li>
                     @else
-                    <li class="text-center text-white">{{Auth::user()->name}}</li>
+                    <li class="text-center text-white" id="users_name">{{Auth::user()->name}}</li>
                     <li class="dropdown w-25">
                         <a id="navbarDropdown" class="text-white nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                              <span class="caret"></span>

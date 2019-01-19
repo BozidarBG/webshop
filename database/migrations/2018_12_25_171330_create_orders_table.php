@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->double('total');
             $table->string('payment_status')->default(0);
             $table->string('delivery_status')->default(0);
+            $table->integer('address_id');
             $table->dateTime('paid')->nullable();
             $table->dateTime('delivered')->nullable();
             $table->timestamps();

@@ -6,15 +6,28 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
-    //
-    /*
-                 $table->increments('id');
-            $table->integer('user_id')->index();
-            $table->double('total');
-            $table->string('payment_status')->default(0);
-            $table->string('delivery_status')->default(0);
-            $table->dateTime('paid')->nullable();
-            $table->dateTime('delivered')->nullable();
-            $table->timestamps();
-     */
+    //carts = items in order
+    public function carts(){
+        return $this->hasMany(Cart::class);
+    }
+
+    public function address(){
+        return $this->belongsTo(Address::class);
+    }
+
+    public function formatPrice(){
+        return number_format($this->total, 2, ',', '.').' RSD';
+    }
+
+    public function deliveryStatus(){
+        if($this->delivery_status == 0){
+            return "Undelivered";
+        }elseif($this->delivery_statuy==1){
+            return "In Transit";
+        }elseif($this->delivery_statuy==2){
+            return "Delivered";
+        }else{
+            return "In Preparation";
+        }
+    }
 }

@@ -36,10 +36,11 @@
 
             </div>
             <div class="modal-footer">
-                <span class="badge badge-info p-3" id="cart_total"></span>
-                <a href="{{route('checkout')}}" class="btn btn-warning btn-lg text-white text-small">Go To Checkout</a>
+                <span class="badge badge-info p-3">Total Order is: <span id="cart_total"></span></span>
+                <a href="{{route('checkout')}}" class="btn btn-warning btn-lg text-white text-small">Make a Payment</a>
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
 </div>
+

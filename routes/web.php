@@ -37,6 +37,10 @@ Route::post('/login', [
 
 Route::group(['middleware'=>'auth'], function(){
     Route::get('/checkout', 'CartController@index')->name('checkout');
+    Route::post('/checkout', 'CartController@store')->name('checkout.store');
+    Route::get('/checkout-check', 'CartController@check')->name('checkout.check');
+    Route::get('/products-by-ajax', 'CartController@productsByAjax');
+
     Route::get('/profile', 'ProfileController@show')->name('profile.show');
     Route::get('/address', 'AddressController@create')->name('address.create');
     Route::post('/address', 'AddressController@store')->name('address.store');

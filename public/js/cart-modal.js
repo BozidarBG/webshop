@@ -1,4 +1,4 @@
-$(document).ready(function(){
+
 
 
     //when clicked add to cart on the product
@@ -175,19 +175,36 @@ $(document).ready(function(){
     //calculates total order with discounts
     function calculateTotal(){
         let total=0;
+        let totalDiscount=0;
+        let totalWithoutDiscount=0;
+
         //loop through all .cart_row, find price and calculate
         $('.cart_row').each(function(){
+            let orderedQuantity=parseInt($(this).find('.quantity_selected').text());
 
             total +=parseFloat($(this).attr('data-row-total'));
-
+            totalDiscount +=parseFloat(orderedQuantity * $(this).attr('data-price') * $(this).attr('data-discount')/100);
+            totalWithoutDiscount +=parseFloat($(this).attr('data-price') * orderedQuantity);
         });
+
         //console.log(prices)
-        $('#cart_total').html('Total Order is: '+formatPrice(total));
+        $('#cart_total').html(formatPrice(total));
+
+            //only for checkout page
+        let discountDiv=$('#discount');
+        let totalWithoutDiscountDiv=$('#totalWithoutDiscount');
+
+        if(discountDiv && totalWithoutDiscountDiv){
+            $(discountDiv).html(formatPrice(totalDiscount));
+            $(totalWithoutDiscountDiv).html(formatPrice(totalWithoutDiscount));
+        }
+
     }
 
     function addPlusMinusListeners(){
         //plus listener
         $('.plus').on('click', function(event){
+
             //find product id
             let parent=$(this).closest('.cart_row');
             let product_id=$(parent).attr('data-id');
@@ -211,6 +228,7 @@ $(document).ready(function(){
         });
         //minus listener
         $('.minus').on('click', function(){
+
             //find product id
             let parent=$(this).closest('.cart_row');
             let product_id=$(parent).attr('data-id');
@@ -237,6 +255,7 @@ $(document).ready(function(){
 
     //only for plus and minus quantities listeners
     function updateQuantity(parentObj, operation, ordered_quantity){
+
         if(operation=="minus"){
             $(parentObj).find('.quantity_selected').text(parseInt(ordered_quantity-1));
         }else{
@@ -305,99 +324,6 @@ $(document).ready(function(){
 
 
 
-
-
-
-
-
-
-
-
-    //sending register
-    $('#register_form').on('submit', function(event) {
-        event.preventDefault();
-        let name = $('#register_name').val();
-        let isName=name.length > 2;
-        let email = $('#register_email').val();
-        let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        let isAnEmail = re.test(email.toLowerCase());
-        let password=$('#register_password').val();
-        let passwordConfirmation=$('#register_confirm').val()
-        let passwordLength = password.length >= 6;
-        let passwordConfirm = password == passwordConfirmation;
-        let checked=$('#register_checked').prop('checked');
-        let url=$('#register_form').attr('action');
-
-        if(isName && isAnEmail && passwordLength && passwordConfirm && checked) {
-            //converts data to string
-            //var form_data = $(this).serialize();
-            $.ajaxSetup({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                }
-            });
-            let form_data = {};
-            form_data.name=name;
-            form_data.email=email;
-            form_data.password=password;
-            form_data.password_confirmation=passwordConfirmation;
-
-            //console.log(form_data)
-            //return
-            //send ajax request
-            $.ajax({
-                url: url,
-
-                method: 'POST',
-                data: form_data,
-                dataType: 'json',
-                success: function (data) {
-
-                    if (data[0] == "error") {
-                        //we have errors
-                        let rows = "";
-                        $.each(data[1], function (index, message) {
-                            rows += "<div class='alert alert-danger'>" + message + "</div>";
-                        })
-
-                        $('#register_form_output').append(rows);
-                    } else if (data == "success") {
-                        $('#register_form')[0].reset();
-                        $('#registerModal').modal('hide');
-                        location.reload();
-                    }
-                }
-
-            });//end .ajax
-        }else{
-            $('#register_form_output').html('')
-            //some inputs are not correct
-            if(!name){
-                let row="<div class='alert alert-danger'>Your name is not minimum 3 characters long</div>";
-                $('#register_form_output').append(row);
-            }
-            if(!isAnEmail){
-                let row="<div class='alert alert-danger'>Email is not in correct format</div>";
-                $('#register_form_output').append(row);
-            }
-            if(!passwordLength){
-                let row="<div class='alert alert-danger'>Password must be at least 6 characters long</div>";
-                $('#register_form_output').append(row);
-            }
-            if(!passwordConfirm){
-                let row="<div class='alert alert-danger'>Your password and retyped password don't match</div>";
-                $('#register_form_output').append(row);
-            }
-            if(!checked){
-                let row="<div class='alert alert-danger'>You need to agree with our terms of service. Please click the checkbox</div>";
-                $('#register_form_output').append(row);
-            }
-        }
-    });//end send register form
-
-
-
-});//end document ready
 
 
 

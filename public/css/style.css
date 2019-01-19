@@ -3198,35 +3198,15 @@ div#testimonials h4.m-title {
     border-left: 1px solid #ffffff;
 }
 
-.table_row{
-    /*border-top:1px solid black;*/
-    color: black;
-    text-align: center;
-    font-size: 15px;
-}
 
-.table_row div{
-    border-left: 1px solid black;
-    border-bottom: 1px solid black;
-}
-.table_row div:first-child{
-    margin-left: 2px;
-    margin-right: -2px;
-}
 
-.table_row div:last-child{
-    margin-right: 2px;
-    margin-left:-2px;
-    border-right: 1px solid black;
-}
+/*.quantity_selector{*/
+    /*border: none !important;*/
+    /*text-align: center;*/
+    /*vertical-align: middle ;*/
+    /*display: inline-block;*/
 
-.quantity_selector{
-    border: none !important;
-    text-align: center;
-    vertical-align: middle !important;
-    display: inline-block;
-
-}
+/*}*/
 .quantity_selector button{
     font-size: 1.1em;
 
@@ -3259,3 +3239,32 @@ div#testimonials h4.m-title {
 .btn_circle{
     border-radius: 5%;
 }
+
+.checkout-header{
+    border:2px solid #F45C5D;
+}
+.border-h-r{
+    border-right: 2px solid #F45C5D;
+
+}
+.border-r-l{
+    border-left: 2px solid #F45C5D;
+}
+.checkout-row{
+    border-bottom: 2px solid #F45C5D;
+    border-left: 2px solid #F45C5D;
+    border-right: 2px solid #F45C5D;
+}
+.border-b-r{
+    border-bottom: 2px solid #F45C5D;
+    border-right: 2px solid #F45C5D;
+}
+
+.col-half{
+width: 5.55555%;
+}
+
+.col-1half{
+width: 11.1111%;
+}
+
