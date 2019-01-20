@@ -12,24 +12,40 @@ use Illuminate\Support\Facades\Validator;
 
 class FrontController extends Controller
 {
-    public function welcome(){
+    public function welcome(Request $request){
+
+        $products=Product::where('quantity', '>', 0)->where('price', '>', 0);
+
+        $products=$this->sortProducts($request, $products);
+
+        $products=$products->get();
+
+        $products=$this->customPaginate($products);
         return view('products')
             ->with('title', 'Our products')
-            ->with('products', Product::inRandomOrder()->take(15)->paginate(15));
+            ->with('products', $products);
 
     }
-//show all products that belongs to the given category
-    public function category($slug){
+    //show all products that belongs to the given category
+    public function category(Request $request, $slug){
 
         $category=Category::where('slug', $slug)->first();
         if(!isset($category)){
             return redirect()->back();
         }
-        $products=Category::find($category->id)->products()->get();
-        //dd($products);
+
+        $products=Category::find($category->id)->products()->where('quantity', '>', 0)->where('price', '>', 0);
+
+        $products=$this->sortProducts($request, $products);
+
+        $products=$products->get();
+
+        $products=$this->customPaginate($products);
+
+
         return view('products')
             ->with('title', $category->name)
-            ->with('products', Category::find($category->id)->products()->paginate(15));
+            ->with('products', $products);
     }
 
     //show single product, by slug. if slug doesn't exist, return back without error msg
@@ -42,16 +58,43 @@ class FrontController extends Controller
     }
 
     //show all products for a given brand.
-    public function brand($slug){
+    public function brand(Request $request, $slug){
+        //dd($request->all());
         $brand=Brand::where('slug', $slug)->first();
         if(!isset($brand)){
             return redirect()->back();
         }
-        $products=Product::where('brand_id', $brand->id)->paginate(15);
+
+        $products=Product::where('brand_id', $brand->id)->where('quantity', '>', 0)->where('price', '>', 0);
+
+        $products=$this->sortProducts($request, $products);
+
+        $products=$products->get();
+
+        $products=$this->customPaginate($products);
+
+
+
+        //$products=Product::where('brand_id', $brand->id)->paginate(15);
         //dd($products);
         return view('products')
             ->with('title', $brand->name)
             ->with('products', $products);
+    }
+
+    protected function sortProducts($request, $products){
+        //dd($products);
+        if($request->has('sort')){
+            if($request->sort=="low_high"){
+                return $products->orderBy('price', 'asc');
+            }elseif($request->sort=="high_low"){
+                return $products->orderBy('price', 'desc');
+            }else{
+                return $products;
+            }
+        }else{
+            return $products;
+        }
     }
 
     //shows about page
@@ -156,10 +199,6 @@ class FrontController extends Controller
         return view('products')
             ->with('title', 'Search')
             ->with('products', $products);
-
-
-
-
     }
 
 }

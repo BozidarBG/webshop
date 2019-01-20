@@ -102,6 +102,7 @@ class CartController extends Controller
         foreach($this->existing_ordered_products as $product){
             $DB_product=Product::find($product['id']);
             $DB_product->quantity -= $product['quantity'];
+            $DB_product->bought +=$product['quantity'];
             $DB_product->save();
         }
     }

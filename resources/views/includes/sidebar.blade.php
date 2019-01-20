@@ -4,9 +4,8 @@
         <!-- price -->
         <div class="range border-bottom py-2">
             <h3 class="agileits-sear-head mb-3">Sort By Price</h3>
-            {{--<a href="{{route('low-to-high',['page_name'=>$title])}}">Low to high</a><br>--}}
-            {{--<a href="{{route('high-to-low',['page_name'=>$title])}}">High to low</a>--}}
-
+            <a href="{{route(Request::route()->getName(),['page_name'=>$title, 'sort' => 'low_high'])}}">Low to high</a><br>
+            <a href="{{route(Request::route()->getName(),['page_name'=>$title, 'sort' => 'high_low'])}}">High to low</a>
         </div>
 
         <div class="range border-bottom py-2">
@@ -101,7 +100,7 @@
                     @foreach($brands as $brand)
                         <li>
                             <i class="far fa-hand-point-right"></i>&nbsp;
-                            <a href="{{route('brand', ['slug'=>$brand->name])}}" class="span">{{$brand->name}}</a>
+                            <a href="{{route('brand', ['slug'=>$brand->slug])}}" class="span">{{$brand->name}}</a>
                         </li>
                     @endforeach
                 </ul>

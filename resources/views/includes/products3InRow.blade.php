@@ -63,5 +63,6 @@ $count=$products->count();
         </div>
     </div>
 @endif
-{{$products->links()}}
+{{--{{$products->links()}}--}}
+{{ $products->appends(request()->input())->links() }}
 <br>
