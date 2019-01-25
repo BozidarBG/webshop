@@ -1,7 +1,6 @@
 <div class="col-lg-3 mt-lg-0 mt-4 p-lg-0">
     <div class="side-bar p-sm-4 p-3">
 
-        <!-- price -->
         <div class="range border-bottom py-2">
             <h3 class="agileits-sear-head mb-3">Sort By Price</h3>
             <a href="{{route(Request::route()->getName(),['page_name'=>$title, 'sort' => 'low_high'])}}">Low to high</a><br>
@@ -27,59 +26,8 @@
             </form>
 
         </div>
-        <!-- //price -->
-        <!-- reviews -->
-        <div class="customer-rev border-bottom left-side py-2">
-            <h3 class="agileits-sear-head mb-3">Customer Review</h3>
-            <ul>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span>5.0</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span>4.0</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half"></i>
-                        <span>3.5</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <span>3.0</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half"></i>
-                        <span>2.5</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-        <!-- //reviews -->
-        <!-- electronics -->
+
+
         <div class="left-side border-bottom py-2">
             <h3 class="agileits-sear-head mb-3">Categories</h3>
             <ul>
@@ -91,8 +39,7 @@
                 @endforeach
             </ul>
         </div>
-        <!-- //electronics -->
-        {{--<div class="side-bar p-sm-4 p-3">--}}
+
         <div class="search-hotel border-bottom py-2">
             <h3 class="agileits-sear-head mb-3">Brands</h3>
             <div class="left-side py-2">

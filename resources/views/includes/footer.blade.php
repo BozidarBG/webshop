@@ -18,7 +18,7 @@
                         </div>
                         <div class="col-8 text-form-footer">
                             <h3>Free Shipping</h3>
-                            <p>on orders over $100</p>
+                            <p>on orders over 3.000 RSD</p>
                         </div>
                     </div>
                 </div>
@@ -29,7 +29,7 @@
                         </div>
                         <div class="col-8 text-form-footer">
                             <h3>Fast Delivery</h3>
-                            <p>World Wide</p>
+                            <p>Entire country</p>
                         </div>
                     </div>
                 </div>
@@ -56,24 +56,11 @@
                 <div class="col-md-3 col-sm-6 footer-grids">
                     <h3 class="text-white font-weight-bold mb-3">Categories</h3>
                     <ul>
+                        @foreach($categories as $category)
                         <li class="mb-3">
-                            <a href="product.html">Mobiles </a>
+                            <a href="{{route('category', ['slug'=>$category->slug])}}">{{$category->name}} </a>
                         </li>
-                        <li class="mb-3">
-                            <a href="product.html">Computers</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="product.html">TV, Audio</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="product2.html">Smartphones</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="product.html">Washing Machines</a>
-                        </li>
-                        <li>
-                            <a href="product2.html">Refrigerators</a>
-                        </li>
+                        @endforeach
                     </ul>
                 </div>
                 <!-- //footer categories -->
@@ -82,41 +69,30 @@
                     <h3 class="text-white font-weight-bold mb-3">Quick Links</h3>
                     <ul>
                         <li class="mb-3">
-                            <a href="about.html">About Us</a>
+                            <a href="{{route('about')}}">About Us</a>
                         </li>
                         <li class="mb-3">
-                            <a href="contact.html">Contact Us</a>
+                            <a href="{{route('contact')}}">Contact Us</a>
                         </li>
+                        @auth
                         <li class="mb-3">
-                            <a href="help.html">Help</a>
+                            <a href="{{route('profile.show')}}">Profile</a>
                         </li>
-                        <li class="mb-3">
-                            <a href="faqs.html">Faqs</a>
-                        </li>
-                        <li class="mb-3">
-                            <a href="terms.html">Terms of use</a>
-                        </li>
-                        <li>
-                            <a href="privacy.html">Privacy Policy</a>
-                        </li>
+                        @endauth
                     </ul>
                 </div>
                 <div class="col-md-3 col-sm-6 footer-grids mt-md-0 mt-4">
                     <h3 class="text-white font-weight-bold mb-3">Get in Touch</h3>
                     <ul>
                         <li class="mb-3">
-                            <i class="fas fa-map-marker"></i> 123 Sebastian, USA.</li>
+                            <i class="fas fa-map-marker"></i> {{setting('site.address')}} {{setting('site.city')}}</li>
                         <li class="mb-3">
-                            <i class="fas fa-mobile"></i> 333 222 3333 </li>
+                            <i class="fas fa-mobile"></i> {{setting('site.phone2')}} </li>
                         <li class="mb-3">
-                            <i class="fas fa-phone"></i> +222 11 4444 </li>
+                            <i class="fas fa-phone"></i> {{setting('site.phone1')}} </li>
                         <li class="mb-3">
                             <i class="fas fa-envelope-open"></i>
-                            <a href="mailto:example@mail.com"> mail 1@example.com</a>
-                        </li>
-                        <li>
-                            <i class="fas fa-envelope-open"></i>
-                            <a href="mailto:example@mail.com"> mail 2@example.com</a>
+                            <a href="mailto:example@mail.com"> {{setting('site.email')}}</a>
                         </li>
                     </ul>
                 </div>
@@ -162,252 +138,6 @@
     </div>
     <!-- //footer third section -->
 
-    <!-- footer fourth section -->
-    <div class="agile-sometext py-md-5 py-sm-4 py-3">
-        <div class="container">
-            <!-- brands -->
-            <div class="sub-some">
-                <h5 class="font-weight-bold mb-2">Mobile & Tablets :</h5>
-                <ul>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Android Phones</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Smartphones</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Feature Phones</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Unboxed Phones</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Refurbished Phones</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2"> Tablets</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">CDMA Phones</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Value Added Services</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Sell Old</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Used Mobiles</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="sub-some mt-4">
-                <h5 class="font-weight-bold mb-2">Computers :</h5>
-                <ul>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Laptops </a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Printers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Routers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Ink & Toner Cartridges</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Monitors</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Video Games</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Unboxed & Refurbished Laptops</a>
-                    </li>
-                    <li>
-                        <a href="product.html" class="border-right pr-2">Assembled Desktops</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Data Cards</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="sub-some mt-4">
-                <h5 class="font-weight-bold mb-2">TV, Audio & Large Appliances :</h5>
-                <ul>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">TVs & DTH</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Home Theatre Systems</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Hidden Cameras & CCTVs</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Refrigerators</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Washing Machines</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2"> Air Conditioners</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Cameras</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Speakers</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="sub-some mt-4">
-                <h5 class="font-weight-bold mb-2">Mobile & Laptop Accessories :</h5>
-                <ul>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Headphones</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Power Banks </a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Backpacks</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Mobile Cases & Covers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Pen Drives</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">External Hard Disks</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2"> Mouse</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Smart Watches & Fitness Bands</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">MicroSD Cards</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="sub-some mt-4">
-                <h5 class="font-weight-bold mb-2">Appliances :</h5>
-                <ul>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Trimmers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Hair Dryers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Emergency Lights</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Water Purifiers </a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Electric Kettles</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Hair Straighteners</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Induction Cooktops</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Sewing Machines</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2"> Geysers</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="sub-some mt-4">
-                <h5 class="font-weight-bold mb-2">Popular on Electro Store</h5>
-                <ul>
-                    <li class="m-sm-1">
-                        <a href="product.html" class="border-right pr-2">Offers & Coupons</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Couple Watches</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Gas Stoves</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2"> Air Coolers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Air Purifiers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Headphones</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2"> Headsets</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Pressure Cookers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Sandwich Makers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Air Friers</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Irons</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">LED TV</a>
-                    </li>
-                    <li class="m-sm-1">
-                        <a href="product2.html" class="border-right pr-2">Sandwich Makers</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- //brands -->
-            <!-- payment -->
-            <div class="sub-some child-momu mt-4">
-                <h5 class="font-weight-bold mb-3">Payment Method</h5>
-                <ul>
-                    <li>
-                        <img src="images/pay2.png" alt="">
-                    </li>
-                    <li>
-                        <img src="images/pay5.png" alt="">
-                    </li>
-                    <li>
-                        <img src="images/pay1.png" alt="">
-                    </li>
-                    <li>
-                        <img src="images/pay4.png" alt="">
-                    </li>
-                    <li>
-                        <img src="images/pay6.png" alt="">
-                    </li>
-                    <li>
-                        <img src="images/pay3.png" alt="">
-                    </li>
-                    <li>
-                        <img src="images/pay7.png" alt="">
-                    </li>
-                    <li>
-                        <img src="images/pay8.png" alt="">
-                    </li>
-                    <li>
-                        <img src="images/pay9.png" alt="">
-                    </li>
-                </ul>
-            </div>
-            <!-- //payment -->
-        </div>
-    </div>
-    <!-- //footer fourth section (text) -->
 </footer>
 <!-- //footer -->
 <!-- copyright -->

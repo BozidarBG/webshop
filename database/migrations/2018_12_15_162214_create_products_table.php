@@ -26,7 +26,7 @@ class CreateProductsTable extends Migration
             $table->integer('quantity')->unsigned()->default(0);
             $table->double('discount')->unsigned()->default(0);
             $table->integer('bought')->default(0);
-            $table->double('stars')->default(0);
+            //$table->double('stars')->default(0);
             $table->string('image')->nullable();
             $table->string('image2')->nullable();
             $table->string('image3')->nullable();

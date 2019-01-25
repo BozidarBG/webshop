@@ -49,10 +49,7 @@
             <div class="col-lg-8 header-right mt-lg-0 mt-2">
                 <!-- header lists -->
                 <ul>
-                    <li class="text-center border-right text-white">
-                        <a href="#" data-toggle="modal" data-target="#exampleModal" class="text-white">
-                            <i class="fas fa-truck mr-2"></i>Track Order</a>
-                    </li>
+
                     <li class="text-center border-right text-white">
                         <i class="fas fa-phone mr-2"></i> {{setting('site.phone1')}}
                     </li>
@@ -100,22 +97,18 @@
 <!-- //shop locator (popup) -->
 
 <!-- modals -->
-@include('includes.register-login1')
+@include('includes.register-login')
 <!-- //modal -->
-<!-- //top-header -->
 
 @include('includes.header')
+@if(Route::currentRouteName() != "checkout"  && Route::currentRouteName() !="profile"&& Route::currentRouteName() !="thank-you" && Route::currentRouteName() != "profile.show")
 
-{{--@include('includes.slider')--}}
-
-
+@include('includes.slider')
+@endif
 
 @yield('content')
 
-{{--@include('includes.special')--}}
-
-
-{{--@include('includes.footer')--}}
+@include('includes.footer')
 <!-- //copyright -->
 @include('includes.cart-modal')
 <!-- js-files -->
@@ -162,50 +155,7 @@
 
     });
 </script>
-<!-- //popup modal (for location)-->
 
-<!-- cart-js -->
-{{--<script src="{{asset('js/minicart.js')}}"></script>--}}
-<script>
-//    paypals.minicarts.render(); //use only unique class names other than paypals.minicarts.Also Replace same class name in css and minicart.min.js
-//
-//    paypals.minicarts.cart.on('checkout', function (evt) {
-//        var items = this.items(),
-//                len = items.length,
-//                total = 0,
-//                i;
-//
-//        // Count the number of each item in the cart
-//        for (i = 0; i < len; i++) {
-//            total += items[i].get('quantity');
-//        }
-
-//        if (total < 3) {
-//            alert('The minimum order quantity is 3. Please add more to your shopping cart before checking out');
-//            evt.preventDefault();
-//        }
-//    });
-</script>
-<!-- //cart-js -->
-
-<!-- password-script -->
-{{--<script>--}}
-    {{--window.onload = function () {--}}
-        {{--document.getElementById("password1").onchange = validatePassword;--}}
-        {{--document.getElementById("password2").onchange = validatePassword;--}}
-    {{--}--}}
-
-    {{--function validatePassword() {--}}
-        {{--var pass2 = document.getElementById("password2").value;--}}
-        {{--var pass1 = document.getElementById("password1").value;--}}
-        {{--if (pass1 != pass2)--}}
-            {{--document.getElementById("password2").setCustomValidity("Passwords Don't Match");--}}
-        {{--else--}}
-            {{--document.getElementById("password2").setCustomValidity('');--}}
-        {{--//empty string means no validation error--}}
-    {{--}--}}
-{{--</script>--}}
-<!-- //password-script -->
 <!--   Custom login /register verification -->
 <script src="{{asset('js/register-login.js')}}"></script>
 <!-- scroll seller -->
@@ -217,7 +167,7 @@
 <!-- //smoothscroll -->
 
 <!-- start-smooth-scrolling -->
-{{--<script src="{{asset('js/move-top.js')}}"></script>--}}
+<script src="{{asset('js/move-top.js')}}"></script>
 <script src="{{asset('js/easing.js')}}"></script>
 <script>
     jQuery(document).ready(function ($) {

@@ -42,8 +42,8 @@
                                             <span class="text-small">Paid on: {{$order->created_at->format('d.m.Y H:i')}}</span>
                                         </div>
                                         <div class="col-md-3">
-                                            <span class="text-small">Address: {{$order->address->street}}</span><br>
-                                            <span class="text-small">{{$order->address->post_code}} {{$order->address->city}}</span>
+                                            <span class="text-small">Address: {{$order->street}}</span><br>
+                                            <span class="text-small">{{$order->post_code}} {{$order->city}}</span>
                                         </div>
                                         <div class="col-md-3">
                                             <span class="text-small">Delivery status: {{$order->deliveryStatus()}}</span><br>

@@ -25,11 +25,15 @@ $count=$products->count();
                                 <a href="{{route('product', ['slug'=>$products[$x]->slug])}}">{{$products[$x]->name}}</a>
                             </h4>
                             <div class="info-product-price my-2">
-                                <span class="item_price">{{$products[$x]->formatPrice()}}</span>
-                                {{--<del>$280.00</del>--}}
+                                @if($products[$x]->discount)
+                                <span class="item_price">{{$products[$x]->formatPrice()}}</span><br>
+                                <del>{{$products[$x]->formatPriceWithoutDiscount()}}</del>
+                                @else
+                                    <span class="item_price">{{$products[$x]->formatPrice()}}</span>
+                                @endif
                             </div>
                             <div>
-
+                            @auth
                                     <fieldset data-id="{{$products[$x]->id}}">
                                         <input type="hidden" name="name" value="{{$products[$x]->name}}" />
                                         <input type="hidden" name="price" value="{{$products[$x]->price}}" />
@@ -37,7 +41,7 @@ $count=$products->count();
                                         <input type="hidden" name="quantity" value="{{$products[$x]->quantity}}" />
                                         <input type="button" name="submit" value="Add to cart" class="btn btn-primary open_cart_modal" />
                                     </fieldset>
-
+                            @endauth
                             </div>
                         </div>
                     </div>

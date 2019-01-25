@@ -107,6 +107,7 @@ class CartController extends Controller
         }
     }
 
+    //place in the table value of address object so that user can't change address stated on the order
     protected function registerOrder($amount, $address){
         //puts this order in orders table
         $order=new Order();
@@ -114,7 +115,19 @@ class CartController extends Controller
         $order->total=$amount;
         $order->payment_status=true;
         $order->paid=Carbon::now()->toDateTimeString();
-        $order->address_id=$address->id;
+        $order->city=$address->city;
+        $order->post_code=$address->post_code;
+        $order->street=$address->street;
+        $order->contact=$address->contact;
+        $order->phone1=$address->phone1;
+        if($address->phone2){
+            $order->phone2=$address->phone2;
+        }
+        $order->email=$address->email;
+        if($address->comment){
+            $order->comment=$address->comment;
+        }
+
         $order->save();
 
         //puts all products in carts table

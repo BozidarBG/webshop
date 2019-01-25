@@ -21,17 +21,18 @@
                     <div class="grid images_3_of_2">
                         <div class="flexslider">
                             <ul class="slides">
+
                                 <li data-thumb="{{$product->getImage($product->image)}}">
                                     <div class="thumb-image">
                                         <img src="{{$product->getImage($product->image)}}" data-imagezoom="true" class="img-fluid" alt="{{$product->name}}"> </div>
                                 </li>
-                                @if(strpos($product->getImage($product->image2), 'noimage.jpg') ==-1)
+                                @if(strpos($product->getImage($product->image2), 'noimage') == false)
                                 <li data-thumb="{{$product->getImage($product->image2)}}">
                                     <div class="thumb-image">
                                         <img src="{{$product->getImage($product->image2)}}" data-imagezoom="true" class="img-fluid" alt="{{$product->name}}"> </div>
                                 </li>
                                 @endif
-                                @if(strpos($product->getImage($product->image3), 'noimage.jpg') ==-1)
+                                @if(strpos($product->getImage($product->image3), 'noimage') == false)
                                 <li data-thumb="{{$product->getImage($product->image3)}}">
                                     <div class="thumb-image">
                                         <img src="{{$product->getImage($product->image3)}}" data-imagezoom="true" class="img-fluid" alt="{{$product->name}}"> </div>
@@ -68,7 +69,7 @@
                     </div>
                     <div class="occasion-cart">
                         <div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out">
-
+                        @auth
                             <fieldset data-id="{{$product->id}}">
                                 <input type="hidden" name="name" value="{{$product->name}}" />
                                 <input type="hidden" name="price" value="{{$product->price}}" />
@@ -76,7 +77,7 @@
                                 <input type="hidden" name="quantity" value="{{$product->quantity}}" />
                                 <input type="button" name="submit" value="Add to cart" class="btn btn-primary open_cart_modal" />
                             </fieldset>
-
+                        @endauth
                         </div>
                     </div>
                 </div>

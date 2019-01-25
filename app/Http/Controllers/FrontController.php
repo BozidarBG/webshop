@@ -169,22 +169,20 @@ class FrontController extends Controller
         $page=LengthAwarePaginator::resolveCurrentPage();
         $perPage=15;
 
-
-        //od kog elementa slajsujemo i koliko komada
-        //index počinje od nula... ako smo na prvoj stranici, page-1=0 * 0 =0 znači od 0 do 10-tog člana (bez rbr.10)
-        //ako smo na drugoj 2-1*10 = od 10-tog člana do dalje
+        //from which element in collection we slice and how many elements
+        //index starts at 0. if we are on the first page, (1-1)*0=0. from 0 to 10th element (without id 10)
+        //if we are on the second page, it will be (2-1)*10 = 10, from 10th to ...
         $results=$productsCollection->slice(($page-1)*$perPage, $perPage)->values();
 
-        //rezultati, veličina kolekcije, koliko kom po stranici, trenutna stranica i opcije.
-        //path nam pomaže da nadjemo sledeću i prethodnu stranicu
+        //results, number of elements, per page (15), current page and options
+        //path will help us to find next and previous page
         $paginated = new LengthAwarePaginator($results, $productsCollection->count(), $perPage, $page,[
             'path'=>LengthAwarePaginator::resolveCurrentPath()
         ]);
 
-        //moramo da kažemo da uključi i ostale parametre da ne bi ignorisao per_page=X
+        //we need to state to include other parameters in order not to ignore per_page=$x
         //http://simpleapi.test/api/articles?per_page=3&page=2
         //$paginated->appends(request()->all());
-
 
         return $paginated;
     }

@@ -12,7 +12,7 @@ class ProfileController extends Controller
     public function show(){
         return view('profile')
             ->with('addresses', Address::where('user_id', Auth::id())->get())
-            ->with('orders', Order::with('address', 'carts.product')->where('user_id', Auth::id())->get());
+            ->with('orders', Order::with('carts.product')->where('user_id', Auth::id())->get());
     }
 
 

@@ -18,9 +18,10 @@
                 <div class="w3l-space-banner">
                     <div class="carousel-caption p-lg-5 p-sm-4 p-3">
                         <p>{{$sliders[$i]->text_top}}</p>
-                        <h3 class="font-weight-bold pt-2 pb-lg-5 pb-4">{{$sliders[$i]->text_bottom}}
+                        <h3 class="font-weight-bold pt-2 ">{{$sliders[$i]->text_bottom}}
                         </h3>
-                        <a class="button2" href="product.html">Shop Now </a>
+                        <p class="font-weight-bold pt-2 pb-lg-5 pb-4">{{$sliders[$i]->product->name}}</p>
+                        <a class="button2" href="{{route('product', ['slug'=>$sliders[$i]->product->slug])}}">Shop Now </a>
                     </div>
                 </div>
             </div>
