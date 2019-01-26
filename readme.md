@@ -16,7 +16,7 @@ Moderator can:<br>
 
 Administrator can:<br>
 - change user roles<br>
-- CRUD with categories<br>
+- CRUD categories<br>
 - CRUD brands<br>
 - change site settings<br>
 - change content of the slider<br>
