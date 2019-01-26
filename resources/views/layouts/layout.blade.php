@@ -5,7 +5,7 @@
     <!-- Meta tag Keywords -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta charset="UTF-8" />
-    <meta name="keywords" content=""/>
+    <meta name="keywords" content="{{setting('site.keywords')}}"/>
     <script>
         addEventListener("load", function () {
             setTimeout(hideURLbar, 0);

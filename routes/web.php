@@ -56,7 +56,8 @@ Route::group(['middleware'=>'auth'], function(){
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
-
+    Route::get('/orders/{order}', 'VoyagerOrdersController@show')->name('voyager.orders.show');
+    Route::post('/orders/{order}', 'VoyagerOrdersController@updateDelivery')->name('voyager.update.delivery');
 });
 
 

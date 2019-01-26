@@ -22,12 +22,16 @@ class Order extends Model
     public function deliveryStatus(){
         if($this->delivery_status == 0){
             return "Undelivered";
-        }elseif($this->delivery_statuy==1){
-            return "In Transit";
-        }elseif($this->delivery_statuy==2){
+        }elseif($this->delivery_status==1){
+            return "In preparation";
+        }elseif($this->delivery_status==2){
+            return "In transit";
+        }elseif($this->delivery_status==3){
             return "Delivered";
+        }elseif($this->delivery_status==4){
+            return "Returned";
         }else{
-            return "In Preparation";
+            return "Unknown";
         }
     }
 }
